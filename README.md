@@ -11,10 +11,10 @@ What this application demonstrates:
 
 ### Demo Type
 - **Level**: Advanced
-- **Topic**: Taipy-GUI
-- **Components/Controls**: 
+- **Topic**: Taipy-GUI, Computer Vision
+- **Components/Controls**:
   - Taipy GUI: custom GUI component
-- **Other**: Computer Vision, OpenCV 
+- **Other**: OpenCV
 
 ## How to run
 
@@ -27,15 +27,13 @@ What this application demonstrates:
 
 - Install Python dependencies using `pip install -r requirements.txt`.
 - You need a recent node envorinment to build the front-end components. You may use [nvm](https://github.com/nvm-sh/nvm) to download the latest LTS version.
-- Build the front-end components from the `webcam/webui` directory using `npm run build` or `npm run build:dev`. 
+- Build the front-end components from the `webcam/webui` directory using `npm run build` or `npm run build:dev`.
 - Run the demo from this directory using `python demo.py`.
 
 
 ## Directory Structure
 
 ## License
-Copyright 2023 Avaiga Private Limited
-
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
