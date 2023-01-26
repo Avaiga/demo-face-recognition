@@ -46,7 +46,7 @@ def process_image(state, frame):
     found = detect_faces(frame)
 
     labeled_images = []
-    for (rect, img) in found:
+    for rect, img in found:
         (label, _) = recognize_face(img)
         labeled_images.append((img, rect, label))
 
