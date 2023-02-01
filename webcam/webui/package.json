@@ -19,7 +19,7 @@
     "dependencies": {
         "@types/w3c-image-capture": "^1.0.7",
         "react": "^18.2.0",
-        "taipy-gui": "file:../../venv/lib/python3.10/site-packages/taipy/gui/webapp"
+        "taipy-gui": "file:/Users/gmarabout/.local/share/virtualenvs/demo-face-recognition-3GjZDeuO/lib/python3.11/site-packages/taipy/gui/webapp"
     },
     "scripts": {
         "build:dev": "webpack --mode development",
