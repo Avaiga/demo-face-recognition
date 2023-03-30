@@ -8,8 +8,8 @@ This demo requires Python 3.9 or 3.10. Python 3.11 is currently not supported by
 To install this demo:
 
 ```
-git clone git@github.com:gmarabout/taipy-demo-face-recognition.git
-cd taipy-demo-face-recognition
+git clone git@github.com:Avaiga/demo-demo-face-recognition.git
+cd demo-face-recognition
 ```
 
 To install the dependencies:
