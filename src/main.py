@@ -1,7 +1,10 @@
 from taipy.gui import Gui
 from webcam import Webcam
 import cv2
-from tempfile import NamedTemporaryFile
+
+import PIL.Image
+import io
+
 import logging
 import uuid
 from pathlib import Path
@@ -18,12 +21,12 @@ show_add_captured_images_dialog = False
 
 labeled_faces = []  # Contains rect with label (for UI component)
 
-
 captured_image = None
 captured_label = ""
 
 
 def on_action_captured_image(state, id, action, payload):
+    print("Captured image")
     choice = payload["args"][0]
     if choice == 0:
         # Add image to training data:
@@ -43,6 +46,7 @@ def on_action_captured_image(state, id, action, payload):
 
 
 def process_image(state, frame):
+    print("Processing image...")
     found = detect_faces(frame)
 
     labeled_images = []
@@ -64,38 +68,63 @@ def process_image(state, frame):
 
 
 def handle_image(state, action, args, value):
+    print("Handling image...")
     payload = value["args"][0]
     bytes = payload["data"]
     logging.debug(f"Received data: {len(bytes)}")
-    with NamedTemporaryFile(prefix="taipy_", suffix=".png") as output:
-        # Write Data into temp file (OpenCV is unable to load from memory)
-        output.write(bytes)
-        # Load image file
-        img = cv2.imread(output.name, cv2.IMREAD_UNCHANGED)
-        process_image(state, img)
-        # Finish. Tempfile is removed.
 
+    temp_path = "temp.png"
 
-def button_capture_image_clicked(state):
-    state.capture_image = True
+    # Write Data into temp file (OpenCV is unable to load from memory)
+    image = PIL.Image.open(io.BytesIO(bytes))
+    image.save(temp_path)
+    # Load image file
+    try:
+        img = cv2.imread(temp_path, cv2.IMREAD_UNCHANGED)
+    except cv2.error as e:
+        logging.error(f"Failed to read image file: {e}")
+        return
+    process_image(state, img)
+    # Finish. Tempfile is removed.
 
 
 def button_retrain_clicked(state):
+    print("Retraining...")
     train_face_recognizer(training_data_folder)
 
 
-page = """
-<|webcam.Webcam|faces={labeled_faces}|classname=face_detector|id=my_face_detector|on_data_receive=handle_image|sampling_rate=20|>
+webcam_md = """<|toggle|theme|>
 
-<|Capture|button|on_action={button_capture_image_clicked}|><|RE-train|button|on_action={button_retrain_clicked}|>
+container|container|part|
 
-<|{show_capture_dialog}|dialog|title=Add new training image|labels=Validate;Cancel|on_action=on_action_captured_image|
+# Face **recognition**{: .color-primary}
 
+This demo shows how to use [Taipy](https://taipy.io/) with a [custom GUI component](https://docs.taipy.io/en/latest/manuals/gui/extension/) to capture video from your webcam and do realtime face detection. What this application demonstrates:
+
+- How to build a complex custom UI component for Taipy.
+
+- How to detect and recognize faces in the image in real time using [OpenCV](https://opencv.org/).
+
+<br/>
+
+card|card p-half|part|
+## **Webcam**{: .color-primary} component
+
+|text-center|part|
+<|webcam.Webcam|faces={labeled_faces}|classname=face_detector|id=my_face_detector|on_data_receive=handle_image|sampling_rate=100|>
+
+<|Capture|button|on_action={lambda s: s.assign("capture_image", True)}|>
+<|RE-train|button|on_action=button_retrain_clicked|>
+>
+card>
+container>
+
+
+<|{show_capture_dialog}|dialog|labels=Validate;Cancel|on_action=on_action_captured_image|title=Add new training image|
 <|{captured_image}|image|width=300px|height=300px|>
 
 <|{captured_label}|input|>
 |>
-
 """
 
 if __name__ == "__main__":
@@ -105,6 +134,6 @@ if __name__ == "__main__":
 
     train_face_recognizer(training_data_folder)
 
-    gui = Gui(page)
+    gui = Gui(webcam_md)
     gui.add_library(Webcam())
     gui.run(port=9090)
