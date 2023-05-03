@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const updateCanvasSize = (canvas) => {
     const { width, height } = canvas.getBoundingClientRect()

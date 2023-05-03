@@ -1,5 +1,5 @@
 
-import { useDispatch, useDynamicProperty, createSendActionNameAction } from "taipy-gui";
+import { useDispatch, useDynamicProperty, createSendActionNameAction, useModule } from "taipy-gui";
 import { useMediaStream, useVideo } from "./video";
 import { useCanvas } from "./canvas";
 
@@ -21,12 +21,13 @@ const Webcam = (props: WebcamProps) => {
 
     const mediaStream = useMediaStream({ video: true, audio: false });
     const dispatch = useDispatch();
+    const module = useModule();
 
     const sendImage = (blob) => {
         new Response(blob).arrayBuffer().then((data) => {
             const bytes = new Uint8Array(data);
             console.log("Sending " + bytes.length + " bytes.")
-            const action = createSendActionNameAction(id, onDataReceive, {
+            const action = createSendActionNameAction(id, module, onDataReceive, {
                 "data": bytes,
             });
             dispatch(action);
