@@ -24,14 +24,15 @@ Check out our [`GETTING_STARTED.md`](docs/GETTING_STARTED.md) file.
 
 ## Directory Structure
 
-- `main.py`: Main file containing the demo application code.
-- `demo/`: Contains additional demo source code.
-  - `demo/faces.py`: Contains the code to do face detection and face recognition.
-  - `src/image.py`: Contains shared facility functions.
-- `webcam/`: Contains custom component code. The directory contains the Python files to declare the custom component to Taipy.
-  - `webcam/webui`: Contains the TypeScript source code for the custom React component.
-- `classifiers`: Contains the OpenCV classifiers used in the app for face detection.
-- `images`: Contains the files to train the face detection of the demo. This folder is created at first startup. All image captures will go into this directory.
+- `src/`: Main folder for the application code
+  - `main.py`: Main file containing the demo application code.
+  - `demo/`: Contains additional demo source code.
+    - `demo/faces.py`: Contains the code to do face detection and face recognition.
+    - `src/image.py`: Contains shared facility functions.
+  - `webcam/`: Contains custom component code. The directory contains the Python files to declare the custom component to Taipy.
+    - `webcam/webui`: Contains the TypeScript source code for the custom React component.
+  - `classifiers`: Contains the OpenCV classifiers used in the app for face detection.
+  - `images`: Contains the files to train the face detection of the demo. This folder is created at first startup. All image captures will go into this directory.
 - `docs/`: contains the images for the documentation
 - `CODE_OF_CONDUCT.md`: Code of conduct for members and contributors of _demo-covid-dashboard_.
 - `CONTRIBUTING.md`: Instructions to contribute to _demo-covid-dashboard_.

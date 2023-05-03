@@ -21,4 +21,4 @@ class Webcam(ElementLibrary):
         }
 
     def get_scripts(self) -> list[str]:
-        return ["webcam/webui/dist/webcam.js"]
+        return ["webui/dist/webcam.js"]

@@ -4,22 +4,22 @@
     "private": true,
     "devDependencies": {
         "@types/react": "^18.0.15",
+        "@types/w3c-image-capture": "^1.0.7",
         "@typescript-eslint/eslint-plugin": "^5.30.7",
         "@typescript-eslint/parser": "^5.30.7",
         "copy-webpack-plugin": "^11.0.0",
         "eslint": "^8.20.0",
         "eslint-plugin-react": "^7.30.1",
         "eslint-plugin-react-hooks": "^4.6.0",
-        "eslint-webpack-plugin": "^3.2.0",
+        "eslint-webpack-plugin": "^4.0.1",
         "ts-loader": "^9.3.1",
-        "typescript": "^4.7.4",
+        "typescript": "^5.0.4",
         "webpack": "^5.74.0",
-        "webpack-cli": "^4.10.0"
+        "webpack-cli": "^5.0.2"
     },
     "dependencies": {
-        "@types/w3c-image-capture": "^1.0.7",
         "react": "^18.2.0",
-        "taipy-gui": "file:/Users/gmarabout/.local/share/virtualenvs/demo-face-recognition-3GjZDeuO/lib/python3.11/site-packages/taipy/gui/webapp"
+        "taipy-gui": "file:../../../../../../../.conda/envs/face/lib/site-packages/taipy/gui/webapp"
     },
     "scripts": {
         "build:dev": "webpack --mode development",
