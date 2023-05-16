@@ -8,6 +8,9 @@ What this application demonstrates:
 * How to build a complex custom UI component for Taipy.
 * How to detect and recognize faces in the image in real time using OpenCV.
 
+## Usage
+
+A Webcam component is shown at the center of the application. It can detect faces and identify them. To be able to recognize your face, capture multiple photos of your face (click on the "Capture" button) and write your name when the dialog appears. At the end, click "Retrain" and the model should now recognize your face.
 
 ## Demo Type
 
