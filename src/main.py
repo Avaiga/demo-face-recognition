@@ -10,19 +10,9 @@ import uuid
 from pathlib import Path
 from demo.faces import detect_faces, recognize_face, train_face_recognizer
 
-
 logging.basicConfig(level=logging.DEBUG)
 
 training_data_folder = Path("images")
-
-show_capture_dialog = False
-capture_image = False
-show_add_captured_images_dialog = False
-
-labeled_faces = []  # Contains rect with label (for UI component)
-
-captured_image = None
-captured_label = ""
 
 
 def on_action_captured_image(state, id, action, payload):
@@ -93,7 +83,17 @@ def button_retrain_clicked(state):
     train_face_recognizer(training_data_folder)
 
 
-webcam_md = """<|toggle|theme|>
+if __name__ == "__main__":
+    show_capture_dialog = False
+    capture_image = False
+    show_add_captured_images_dialog = False
+
+    labeled_faces = []  # Contains rect with label (for UI component)
+
+    captured_image = None
+    captured_label = ""
+
+    webcam_md = """<|toggle|theme|>
 
 <container|container|part|
 
@@ -125,9 +125,8 @@ This demo shows how to use [Taipy](https://taipy.io/) with a [custom GUI compone
 
 <|{captured_label}|input|>
 |>
-"""
+    """
 
-if __name__ == "__main__":
     # Create dir where the pictures will be stored
     if not training_data_folder.exists():
         training_data_folder.mkdir()
